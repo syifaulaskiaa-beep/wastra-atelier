@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Wastra Atelier — Butik Tenun Kontemporer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ================= HEADER ================= -->
+  <header class="site-header">
+    <div class="container header-row">
+      <button class="icon-btn mobile-only" id="mobileNavToggle" aria-label="Menu"><span class="icon" data-icon="menu"></span></button>
+      <div class="logo">Wastra <span class="logo-italic">Atelier</span></div>
+      <nav class="nav desktop-only">
+        <a href="#">Koleksi</a>
+        <a href="#">Cerita Kami</a>
+        <a href="#">Kontak</a>
+      </nav>
+      <div class="header-actions">
+        <button class="icon-btn" id="openWishlistBtn" aria-label="Favorit">
+          <span class="icon" data-icon="heart"></span>
+          <span class="badge" id="wishlistCount" hidden>0</span>
+        </button>
+        <button class="icon-btn" id="openCartBtn" aria-label="Tas belanja">
+          <span class="icon" data-icon="bag"></span>
+          <span class="badge" id="cartCount" hidden>0</span>
+        </button>
+      </div>
+    </div>
+    <nav class="nav mobile-nav" id="mobileNav" hidden>
+      <a href="#">Koleksi</a>
+      <a href="#">Cerita Kami</a>
+      <a href="#">Kontak</a>
+    </nav>
+  </header>
+
+  <!-- ================= HERO ================= -->
+  <section class="hero container">
+    <div class="hero-text">
+      <p class="eyebrow">Koleksi Musim Ini · Pesisir Senja</p>
+      <h1 class="display">Kain yang mengingat tangan yang menenunnya.</h1>
+      <p class="hero-desc">Lebih dari 20 koleksi pakaian dan aksesoris tenun kontemporer, ditenun dan dijahit oleh perajin mitra kami di Jawa dan Sumba.</p>
+      <a href="#koleksi" class="btn btn-primary">Lihat Koleksi <span class="icon" data-icon="arrow-right"></span></a>
+    </div>
+    <div class="hero-visual">
+      <div class="swatch swatch--gaun swatch--large"><img src="images/gaun senja batik.jpg" alt="Gaun Senja Batik" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>
+      <div class="hero-visual-col">
+        <div class="swatch swatch--aksesoris"><img src="images/selendang sutra tangan.jpg" alt="Selendang Sutra Tangan" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>
+        <div class="swatch swatch--outer"><img src="images/outer kimono songket.jpg" alt="Outer Kimono Songket" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TRUST BADGES ================= -->
+  <section class="trust container">
+    <div class="trust-item"><span class="icon" data-icon="truck"></span><span>Gratis ongkir min. Rp1jt</span></div>
+    <div class="trust-item"><span class="icon" data-icon="badge-check"></span><span>Buatan tangan asli</span></div>
+    <div class="trust-item"><span class="icon" data-icon="refresh"></span><span>Retur mudah 7 hari</span></div>
+    <div class="trust-item"><span class="icon" data-icon="shield"></span><span>Pembayaran aman</span></div>
+  </section>
+
+  <!-- ================= BEST SELLER ================= -->
+  <section class="container section-block">
+    <h2 class="section-title">Paling Diminati</h2>
+    <div class="carousel" id="bestSellerList"></div>
+  </section>
+
+  <!-- ================= NEW ARRIVALS ================= -->
+  <section class="container section-block">
+    <h2 class="section-title">Baru Datang</h2>
+    <div class="carousel" id="newArrivalsList"></div>
+  </section>
+
+  <!-- ================= KOLEKSI / FILTER ================= -->
+  <section class="container section-block" id="koleksi">
+    <h2 class="section-title">Semua Koleksi</h2>
+
+    <div class="filters">
+      <div class="category-filters" id="categoryFilters"></div>
+
+      <div class="filter-row">
+        <div class="search-box">
+          <span class="icon" data-icon="search"></span>
+          <input type="text" id="searchInput" placeholder="Cari produk..." />
+        </div>
+
+        <select id="priceSelect" class="select-box"></select>
+        <select id="sortSelect" class="select-box">
+          <option value="rekomendasi">Rekomendasi</option>
+          <option value="harga-rendah">Harga Terendah</option>
+          <option value="harga-tinggi">Harga Tertinggi</option>
+          <option value="rating">Rating Tertinggi</option>
+          <option value="terlaris">Paling Laris</option>
+        </select>
+
+        <span class="result-count" id="resultCount"></span>
+      </div>
+    </div>
+
+    <div class="product-grid" id="productGrid"></div>
+    <p class="empty-state" id="emptyState" hidden>Tidak ada yang cocok. Coba kata kunci lain atau ubah filter.</p>
+
+    <div class="load-more-wrap">
+      <button class="btn btn-outline" id="loadMoreBtn" hidden>Muat Lebih Banyak</button>
+    </div>
+  </section>
+
+  <!-- ================= RECENTLY VIEWED ================= -->
+  <section class="container section-block" id="recentlyViewedSection" hidden>
+    <h2 class="section-title">Baru Anda Lihat</h2>
+    <div class="carousel" id="recentlyViewedList"></div>
+  </section>
+
+  <!-- ================= TESTIMONIALS ================= -->
+  <section class="container section-block">
+    <h2 class="section-title">Kata Mereka</h2>
+    <div class="testimonial-grid">
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p>"Bahannya adem banget dan jahitannya rapi, sesuai foto."</p>
+        <p class="testimonial-name">Dinda</p>
+        <p class="testimonial-role">Pelanggan Setia</p>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p>"Suka banget sama motifnya, dapat banyak pujian pas dipakai kondangan."</p>
+        <p class="testimonial-name">Made Ayu</p>
+        <p class="testimonial-role">Pelanggan Setia</p>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p>"Pengiriman cepat, packaging aman, kualitas jauh di atas harga."</p>
+        <p class="testimonial-name">Rizky Amelia</p>
+        <p class="testimonial-role">Pelanggan Setia</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FAQ ================= -->
+  <section class="container section-block">
+    <h2 class="section-title">Pertanyaan Umum</h2>
+    <div class="faq-list" id="faqList"></div>
+  </section>
+
+  <!-- ================= NEWSLETTER ================= -->
+  <section class="newsletter">
+    <div class="container newsletter-row">
+      <div>
+        <p class="eyebrow eyebrow--light">Kabar Atelier</p>
+        <h3 class="display display--light">Jadi yang pertama tahu saat koleksi baru datang.</h3>
+      </div>
+      <form class="newsletter-form" id="newsletterForm">
+        <input type="email" id="newsletterEmail" placeholder="Alamat email" required />
+        <button type="submit" class="btn btn-gold">Daftar</button>
+      </form>
+      <p class="newsletter-success" id="newsletterSuccess" hidden>✓ Berlangganan berhasil.</p>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="footer container">
+    <div class="footer-brand">
+      <p class="display">Wastra Atelier</p>
+      <p>Butik pakaian & aksesoris tenun kontemporer, dibuat bersama perajin lokal di seluruh Indonesia.</p>
+    </div>
+    <div class="footer-col">
+      <p><span class="icon" data-icon="pin"></span> Jl. Kemang Raya No. 21, Jakarta Selatan</p>
+      <p><span class="icon" data-icon="phone"></span> +62 812 3456 7890</p>
+      <p><span class="icon" data-icon="mail"></span> halo@wastratelier.id</p>
+    </div>
+    <div class="footer-col">
+      <p><span class="icon" data-icon="instagram"></span> @wastratelier</p>
+      <p><span class="icon" data-icon="clock"></span> Buka setiap hari, 10.00–20.00</p>
+    </div>
+  </footer>
+  <p class="copyright">© 2026 Wastra Atelier. Dibuat dengan hormat pada tangan-tangan penenun.</p>
+
+  <!-- ================= WHATSAPP BUTTON ================= -->
+  <button class="whatsapp-btn" id="whatsappBtn" aria-label="Chat WhatsApp">
+    <span class="icon" data-icon="whatsapp"></span>
+  </button>
+
+  <!-- ================= PRODUCT MODAL ================= -->
+  <div class="overlay" id="productOverlay" hidden></div>
+  <div class="product-modal" id="productModal" hidden>
+    <div class="product-modal-inner" id="productModalContent"></div>
+  </div>
+
+  <!-- ================= WISHLIST DRAWER ================= -->
+  <div class="overlay" id="wishlistOverlay" hidden></div>
+  <aside class="drawer" id="wishlistDrawer">
+    <div class="drawer-head">
+      <p class="display">Favorit</p>
+      <button class="icon-btn" id="closeWishlistBtn"><span class="icon" data-icon="x"></span></button>
+    </div>
+    <div class="drawer-body" id="wishlistList"></div>
+  </aside>
+
+  <!-- ================= CART DRAWER ================= -->
+  <div class="overlay" id="cartOverlay" hidden></div>
+  <aside class="drawer" id="cartDrawer">
+    <div class="drawer-head">
+      <p class="display">Tas Belanja (<span id="cartDrawerCount">0</span>)</p>
+      <button class="icon-btn" id="closeCartBtn"><span class="icon" data-icon="x"></span></button>
+    </div>
+    <div class="drawer-body" id="cartItems"></div>
+    <div class="drawer-footer" id="cartSummary" hidden></div>
+  </aside>
+
+  <!-- ================= CHECKOUT MODAL ================= -->
+  <div class="overlay" id="checkoutOverlay" hidden></div>
+  <div class="checkout-modal" id="checkoutModal" hidden>
+    <div class="checkout-inner">
+      <button class="icon-btn checkout-close" id="closeCheckoutBtn"><span class="icon" data-icon="x"></span></button>
+
+      <div id="checkoutForm">
+        <h2 class="display">Detail Pengiriman</h2>
+        <form id="orderForm">
+          <input required placeholder="Nama lengkap" id="ckNama" />
+          <input required placeholder="Nomor telepon" id="ckTelepon" />
+          <input required placeholder="Alamat lengkap" id="ckAlamat" />
+          <input required placeholder="Kota" id="ckKota" />
+          <textarea placeholder="Catatan / pesan hadiah (opsional)" id="ckCatatan" rows="2"></textarea>
+
+          <p class="form-label">Metode Pengiriman</p>
+          <div id="shippingOptions"></div>
+
+          <p class="form-label">Metode Pembayaran</p>
+          <div id="paymentOptions"></div>
+
+          <div class="checkout-total">
+            <span>Total Pembayaran</span>
+            <span id="checkoutTotal">Rp0</span>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Buat Pesanan</button>
+        </form>
+      </div>
+
+      <div id="checkoutSuccess" hidden>
+        <div class="success-icon"><span class="icon" data-icon="check"></span></div>
+        <h2 class="display" style="text-align:center">Pesanan Diterima</h2>
+        <p style="text-align:center" class="muted">Nomor pesanan Anda</p>
+        <p style="text-align:center" class="order-number" id="orderNumber"></p>
+        <p style="text-align:center" class="muted">Kami akan mengirimkan konfirmasi ke nomor telepon Anda. Terima kasih telah berbelanja di Wastra Atelier.</p>
+        <button class="btn btn-primary btn-block" id="finishOrderBtn">Selesai</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= TOASTS ================= -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
